@@ -10,6 +10,7 @@ body {
   font-family: Arial,Helvetica,sans-serif;
   background: #181818;
   color: #EFEFEF;
+  overflow-x: hidden;
   font-size: 16px
 }
 
@@ -34,12 +35,13 @@ section.main {
   display: none;
   flex-wrap: nowrap;
   color: #EFEFEF;
-  width: 380px;
+  width: calc(100% - 20px);
   background: #363636;
   padding: 8px;
   border-radius: 4px;
   margin-top: -10px;
-  margin-right: 10px;
+  margin-right:0px;
+  max-width: 480px;
 }
 
 /*     #content {

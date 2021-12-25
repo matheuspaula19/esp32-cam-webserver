@@ -33,8 +33,13 @@ const uint8_t index_ov3660_html[] = R"=====(<!doctype html>
       </div>
       <div id="content">
         <div class="hidden" id="sidebar">
+          
           <input type="checkbox" id="nav-toggle-cb" checked="checked">
             <nav id="menu">
+              <div class="input-group justify-content-center">
+                  <label for="wifi-strength">Signal Strength</label>
+                  <div id="wifi-strength"></div>                       
+              </div>
               <div class="input-group hidden" id="lamp-group">
                 <label for="lamp">Light</label>
                 <div class="range-min">Off</div>
@@ -253,9 +258,11 @@ const uint8_t index_ov3660_html[] = R"=====(<!doctype html>
               </div>
               <div class="input-group" id="preferences-group">
                 <label for="reboot" style="line-height: 2em;">Preferences</label>
-                <button id="reboot" title="Reboot the camera module">Reboot</button>
-                <button id="save_prefs" title="Save Preferences on camera module">Save</button>
-                <button id="clear_prefs" title="Erase saved Preferences on camera module">Erase</button>
+                <div style='width:100%;text-align:center;display:flex;flex-wrap:wrap'>
+                  <button id="reboot" title="Reboot the camera module">Reboot</button>
+                  <button id="save_prefs" title="Save Preferences on camera module">Save</button>
+                  <button id="clear_prefs" title="Erase saved Preferences on camera module">Erase</button>
+                </div>
               </div>
               <div class="input-group" id="cam_name-group">
                 <label for="cam_name">
@@ -544,7 +551,22 @@ const uint8_t index_ov3660_html[] = R"=====(<!doctype html>
         show(agcGain)
       }
     }
-
+    
+    // wifi strength
+    function getWifiStrength(){
+        fetch(`${baseHost}/wifi-info`)
+        .then(response => {
+            if (response.status === 200) {
+                response.text().then(function(data){
+                    var strength = 2 * (parseInt(data) + 100);
+                    document.getElementById("wifi-strength").innerHTML = strength+"%";
+                }).catch(function(err) {
+                    document.getElementById("wifi-strength").innerHTML = "Sem informações";
+                });
+            } 
+        })
+    }
+    
     // Exposure
     const aec = document.getElementById('aec')
     const exposure = document.getElementById('aec_value-group')
@@ -599,6 +621,10 @@ const uint8_t index_ov3660_html[] = R"=====(<!doctype html>
         }, 30000);
       }
     }
+
+    var wifiStrength = window.setInterval(function(){
+        getWifiStrength();
+    }, 5000);
 
   })
   </script>

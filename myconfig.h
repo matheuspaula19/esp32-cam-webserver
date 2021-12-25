@@ -50,7 +50,7 @@ struct station stationList[] = {{"ssid1", "pass1", true},
  */
 
  #define HOSTNAME "esp-garagem"
- #define URL_HOSTNAME "esp-garagem"
+ // #define URL_HOSTNAME "esp-garagem"
 
 /*
  * Static network settings for client mode
@@ -97,7 +97,7 @@ struct station stationList[] = {{"ssid1", "pass1", true},
  *  Uncomment and edit as appropriate
  */
 // #define HTTP_PORT 80
-// #define STREAM_PORT 81
+ #define STREAM_PORT 81
 
 /*
  * Wifi Watchdog defines how long we spend waiting for a connection before retrying,
@@ -114,7 +114,7 @@ struct station stationList[] = {{"ssid1", "pass1", true},
 /*
  * OTA can be password protected to prevent the device being hijacked
  */
-// #define OTA_PASSWORD "SuperVisor"
+ #define OTA_PASSWORD "z1n@z1n@"
 
 /* NTP
  *  Uncomment the following to enable the on-board clock

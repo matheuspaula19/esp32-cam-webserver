@@ -36,6 +36,10 @@ const uint8_t index_simple_html[] = R"=====(<!doctype html>
         <div class="hidden" id="sidebar">
           <input type="checkbox" id="nav-toggle-cb">
             <nav id="menu" style="width:24em;">
+              <div class="input-group justify-content-center">
+                  <label for="wifi-strength">Signal Strength</label>
+                  <div id="wifi-strength"></div>                       
+              </div>
               <div class="input-group hidden" id="lamp-group">
                 <label for="lamp">Light</label>
                 <div class="range-min">Off</div>
@@ -77,10 +81,26 @@ const uint8_t index_simple_html[] = R"=====(<!doctype html>
   </body>
 
   <script>
+  
   document.addEventListener('DOMContentLoaded', function (event) {
     var baseHost = document.location.origin;
     var streamURL = 'Undefined';
 
+    // wifi strength
+    function getWifiStrength(){
+        fetch(`${baseHost}/wifi-info`)
+        .then(response => {
+            if (response.status === 200) {
+                response.text().then(function(data){
+                    var strength = 2 * (parseInt(data) + 100);
+                    document.getElementById("wifi-strength").innerHTML = strength+"%";
+                }).catch(function(err) {
+                    document.getElementById("wifi-strength").innerHTML = "Sem informações";
+                });
+            } 
+        })
+    }
+    
     const settings = document.getElementById('sidebar')
     const waitSettings = document.getElementById('wait-settings')
     const lampGroup = document.getElementById('lamp-group')
@@ -412,6 +432,7 @@ const uint8_t streamviewer_html[] = R"=====(<!doctype html>
       }
     }
 
+    
     // read initial values
     fetch(`${baseHost}/info`)
       .then(function (response) {
