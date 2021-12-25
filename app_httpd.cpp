@@ -781,11 +781,12 @@ void startCameraServer(int hPort, int sPort){
         .handler   = error_handler,
         .user_ctx  = NULL
     };
-    httpd_uri_t wifi_uri = {
-        .uri = "/wifi-info",
+    httpd_uri_t wifi_strength_uri = {
+        .uri = "/wifi-strength",
         .method = HTTP_GET,
         .handler = wifi_handler,
-        .user_ctx = NULL};
+        .user_ctx = NULL
+    };
     httpd_uri_t viewerror_uri = {
         .uri       = "/view",
         .method    = HTTP_GET,
@@ -807,7 +808,7 @@ void startCameraServer(int hPort, int sPort){
             httpd_register_uri_handler(camera_httpd, &capture_uri);
         }
         httpd_register_uri_handler(camera_httpd, &style_uri);
-        httpd_register_uri_handler(camera_httpd, &wifi_uri);
+        httpd_register_uri_handler(camera_httpd, &wifi_strength_uri);
         httpd_register_uri_handler(camera_httpd, &favicon_16x16_uri);
         httpd_register_uri_handler(camera_httpd, &favicon_32x32_uri);
         httpd_register_uri_handler(camera_httpd, &favicon_ico_uri);

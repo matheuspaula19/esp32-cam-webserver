@@ -546,14 +546,14 @@ const uint8_t index_ov2640_html[] = R"=====(<!doctype html>
 
     // wifi strength
     function getWifiStrength(){
-        fetch(`${baseHost}/wifi-info`)
+        fetch(`${baseHost}/wifi-strength`)
         .then(response => {
             if (response.status === 200) {
                 response.text().then(function(data){
                     var strength = 2 * (parseInt(data) + 100);
                     document.getElementById("wifi-strength").innerHTML = strength+"%";
                 }).catch(function(err) {
-                    document.getElementById("wifi-strength").innerHTML = "Sem informações";
+                    document.getElementById("wifi-strength").innerHTML = "Unknown";
                 });
             } 
         })
@@ -616,7 +616,7 @@ const uint8_t index_ov2640_html[] = R"=====(<!doctype html>
 
     var wifiStrength = window.setInterval(function(){
         getWifiStrength();
-    }, 5000);
+    }, 10000);
 
   })
   </script>
