@@ -6,7 +6,7 @@
 
 
 /* Give the camera a name for the web interface */
-#define CAM_NAME "ESP GARAGEM CAM"
+#define CAM_NAME "ESP"
 
 
 /*
@@ -17,8 +17,8 @@
  */
 
 struct station stationList[] = {
-  {"10kbps-2","mtsdpaula", true},
-  {"10kbps-1","mtsdpaula", true}
+  {"","", true},
+  {"","", true}
 };
 
 /*
@@ -49,8 +49,8 @@ struct station stationList[] = {{"ssid1", "pass1", true},
  * The URL_HOSTNAME will be used in place of the IP address in internal URL's
  */
 
- #define HOSTNAME "esp-garagem"
- #define URL_HOSTNAME "esp-garagem"
+ #define HOSTNAME "esp"
+ #define URL_HOSTNAME "esp"
 
 /*
  * Static network settings for client mode
